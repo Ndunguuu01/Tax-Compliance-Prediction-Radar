@@ -1,7 +1,10 @@
 # PREDICTING CORPORATE TAX LOSS RISK IN KENYA
 ### Identifying High-risk firms for Enhanced Tax Compliance and Revenue Recovery
 
-## The Pitch
+Authors: Brian Ndungu, Cyrus Mutuku, Grace Kinyanjui, John Karanja, Catherine Gachiri, Fredrick Nzeve, Jeremy Onsongo
+
+![alt text](<Screenshot 2026-02-05 205838-1.png>)
+
 Kenya's tax authority struggles to meet Corporate Income Tax (CIT) revenue targets because many firms report losses, shrinking the tax base. This project builds a machine learning model to predict which firms are likely to report losses based on theor financial charateristics like cost structure and spending patterns. Using 2024 tax return data from nearly 100,000 firms, we developed a predictive system that helps tax officers prioritize audits on high-risk companies, improving audit efficiency and revenue recovery.
 
 
@@ -52,19 +55,23 @@ We analyzed 2024 Corporate Income Tax return data containing:
 
 - Cleaned sector names and considered rare sectors into "Other" for easier data handling
 - Converted core financial columns (turnover, profit, deductions) to numeric format
-Restricted analysis to active businesses with positive turnover
+- Restricted analysis to active businesses with positive turnover
 
 #### Final Modeling Sample:
 
 - 99,491 firms with valid financial data
 - 36% reported losses (roughly balanced dataset, which is why we did not use SMOTE analysis)
+
 ![alt text](image.png)
+
 - Small firms (Q1 turnover) have the highest loss rates (41.1%), while large firms (Q4) have lowest (27.4%)
+
 ![alt text](image-1.png)
 
 ## Feature Engineering
 We created seven key financial features that capture firms' cost structure and spending behaviour:
 
+![alt text](image-3.png)
 
 Ratio Features
 - Cost-to-Turnover ratio: Cost of sales divided by revenue (mean:0.532, most volatile ratio)
@@ -94,13 +101,7 @@ Extreme values were capped at the 1st and 99th percentiles to prevent outliers f
 
 This removed 159 invalid records leaving 99,332 firms ready for modeling.
 
-
-## Modeling and Evaluation
-### Approach
-Following the CRISP-DM method, we:
-1. Built interpretable baseline models (the logistic regression model)
-2. Trained ensemble and gradient boosting models (Random Forest, XGBoost)
-3. Evaluated performance using business-relevant metrics
+![alt text](image-2.png)
 
 ### Data Preprocessing Pipeline
 #### Numerical Features (7 variables):
@@ -129,14 +130,37 @@ The cleaned and engineered dataset includes:
 - 10 final features (5 ratios + 2 flags + turnover quartile + sector + target)
 - Saved as the final csv dataset for reproducibility
 
+## Modeling and Evaluation
+### Approach
+Following the CRISP-DM method, these models were implemented:
+#### Logistic Regression (the baseline model)
+- Built an interpretable baseline model to understand the significance of our features.
+- This model showed that firm size is a strong predictor. Smaller firms are more likely to report losses compared to large firms.
+- We recorded an ROC-AUC performance of 0.76
 
+
+#### Random Forest Classifier
+- This model enabled us to capture complex, non-linear relationships between financial ratios and tax status.
+- This model as expected outperformed the baseline, better handling outliers and interactions between sectors and cost structures.
+- In terms of performance: 
+We recorded an ROC-AUC score of 0.77 - meaning the model was good at distinguishing the different classes
+PR-AUC score of 0.71 -meaning it was reliable at highlighting that sector differences also play a part in recording losses.
+
+
+#### XGBoost
+- The XGBoost model worked the best, as it gave us an ROC-AUC score of 0.8, which was the highest recorded ROC-AUC compared to other models.
+- The model was really good when it came to finding the hidden patterns in our dataset, eg, it understood that a small construction company behaves very differently from a large bank, something that was missed by the previous models.
+- With this model, we were able to narrow down on the key factors that contribute to losses:
+1. High costs - if costs are 90% or more of sales, the risk of losses is very high
+2. Industry/sector - Construction and Insurance companies report losses more than others
+3. Company size - Huge companies have different loss patterns than small ones.
 
 ## Repository Navigation
 Files included are:
 
-- CIT_Loss_Prediction-Notebook.ipynb : the complete notebook with all the code, explanations and visuals
-- CIT2024.csv : The raw dataset (the one with the initial 313,870 firms)
-- final_modeling_dataset.csv : the cleaned and engineered dataset ready for modeling
+- `CIT_Loss_Prediction-Notebook.ipynb` : the complete notebook with all the code, explanations and visuals
+- `CIT2024.csv` : The raw dataset (the one with the initial 313,870 firms)
+- `final_modeling_dataset.csv` : the cleaned and engineered dataset ready for modeling
 
 
 
@@ -145,7 +169,7 @@ Files included are:
 ### Requirements
 - Python 3.8+
 - Jupyter Notebook or any other coding platform
-- Required packages: pandas, numpy, scikit-learn, matplotlib, seaborn, xgboost, shap
+- Required packages: pandas, numpy, scikit-learn, matplotlib, seaborn, xgboost, joblib, statsmodels
 
 
 ### Steps
