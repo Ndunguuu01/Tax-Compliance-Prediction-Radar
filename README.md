@@ -3,7 +3,7 @@
 
 Authors: Brian Ndungu, Cyrus Mutuku, Grace Kinyanjui, John Karanja, Catherine Gachiri, Fredrick Nzeve, Jeremy Onsongo
 
-![alt text](<Screenshot 2026-02-05 205838-1.png>)
+![Alt text](images/Header_Image.png)
 
 Kenya's tax authority struggles to meet Corporate Income Tax (CIT) revenue targets because many firms report losses, shrinking the tax base. This project builds a machine learning model to predict which firms are likely to report losses based on theor financial charateristics like cost structure and spending patterns. Using 2024 tax return data from nearly 100,000 firms, we developed a predictive system that helps tax officers prioritize audits on high-risk companies, improving audit efficiency and revenue recovery.
 
@@ -62,16 +62,18 @@ We analyzed 2024 Corporate Income Tax return data containing:
 - 99,491 firms with valid financial data
 - 36% reported losses (roughly balanced dataset, which is why we did not use SMOTE analysis)
 
-![alt text](image.png)
+![Alt text](images/image.png)
 
 - Small firms (Q1 turnover) have the highest loss rates (41.1%), while large firms (Q4) have lowest (27.4%)
 
-![alt text](image-1.png)
+![Alt text](images/image-1.png)
 
 ## Feature Engineering
 We created seven key financial features that capture firms' cost structure and spending behaviour:
 
-![alt text](image-3.png)
+![Alt text](images/image-3.png)
+
+Sectors ranked by firm count and loss rate
 
 Ratio Features
 - Cost-to-Turnover ratio: Cost of sales divided by revenue (mean:0.532, most volatile ratio)
@@ -101,7 +103,7 @@ Extreme values were capped at the 1st and 99th percentiles to prevent outliers f
 
 This removed 159 invalid records leaving 99,332 firms ready for modeling.
 
-![alt text](image-2.png)
+![Alt text](images/image-2.png)
 
 ### Data Preprocessing Pipeline
 #### Numerical Features (7 variables):
