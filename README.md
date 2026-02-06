@@ -157,6 +157,28 @@ PR-AUC score of 0.71 -meaning it was reliable at highlighting that sector differ
 2. Industry/sector - Construction and Insurance companies report losses more than others
 3. Company size - Huge companies have different loss patterns than small ones.
 
+## Deployment
+The deployment process shows how the XGBoost model can be integrated into platforms like the KRA systems to process tax risks in real-time.
+
+### Workflow
+The process follows these main steps:
+1. Data Input - key in the various inputs for your selected company
+2. Preprocessing - The automated pipeline cleans the data and creates the necessary financial ratios, ensuring the new data matches the format used for training.
+3. Risk scoring - The trained model predicts the likelihood of a firm reporting a false loss, generating a score between 0 (low risk) and 1 (high risk).
+4. Risk Banding - Based on the generated score, the firms are classified into risk categories to help tax officers prioritize audits.
+
+### Model Serialization
+We use `joblib` to save the trained model and processing tools into one file. This ensures that the same logic and steps used during development are applied in production without needing to retrain the model.
+
+### The Scoring Engine
+The `score_new_returns` function handles new data. It loads the saved model, processes the tax returns, and assigns a risk category:
+- Critical Risk: Score of 0.75 or above
+- High Risk: Score between 0.5 and 0.75
+- Normal Risk: Score below 0.5
+
+![Alt text](Images/Deployment_visual.jpeg)
+Visualisation of the deployment
+
 ## Repository Navigation
 Files included are:
 
