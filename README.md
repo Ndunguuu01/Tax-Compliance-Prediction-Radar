@@ -5,7 +5,7 @@ Authors: Brian Ndungu, Cyrus Mutuku, Grace Kinyanjui, John Karanja, Catherine Ga
 
 ![Alt text](Images/Header_Image.png)
 
-Kenya's tax authority struggles to meet Corporate Income Tax (CIT) revenue targets because many firms report losses, shrinking the tax base. This project builds a machine learning model to predict which firms are likely to report losses based on theor financial charateristics like cost structure and spending patterns. Using 2024 tax return data from nearly 100,000 firms, we developed a predictive system that helps tax officers prioritize audits on high-risk companies, improving audit efficiency and revenue recovery.
+Kenya's tax authority struggles to meet Corporate Income Tax (CIT) revenue targets because many firms report losses, shrinking the tax base. This project builds a machine learning model to predict which firms are likely to report losses based on theoretical financial charateristics like cost structure and spending patterns. Using 2024 tax return data from nearly 100,000 firms, we developed a predictive system that helps tax officers prioritize audits on high-risk companies, improving audit efficiency and revenue recovery.
 
 
 ## Business Understanding
