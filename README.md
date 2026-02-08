@@ -15,7 +15,7 @@ KRA is responsible for collecting national government revenue including a standa
 
 The core issue is the lack of a data-driven framework to:
 1. Identify which firm characteristics are linked to loss reporting
-2. Proactively flag high-riskfirms and sectors for investigation
+2. Proactively flag high-risk firms and sectors for investigation
 3. Understand how firm-level loss behaviour impacts overall tax revenue risk
 
 Who are the benefactors?
@@ -30,7 +30,7 @@ Who are the benefactors?
 An automated risk scoring system that:
 
 1. Processes firm-level CIT return data from the iTax platform
-2. Builds interpretable predictive models starting with ligistic regression
+2. Builds interpretable predictive models starting with logistic regression
 3. Applies machine learning to identify high-risk loss-reporting firms
 4. Translates individual firm risks into insights on aggregate tax revenue
 
@@ -84,7 +84,7 @@ Ratio Features
 
 
 Structural flags
-- High cost flag: Indivates if cost-to-turnover exceeds 90%
+- High cost flag: Indicates if cost-to-turnover exceeds 90%
 - Thin margin Flag: Marks firms with costs between 95-105% of revenue (near-loss)
 
 
