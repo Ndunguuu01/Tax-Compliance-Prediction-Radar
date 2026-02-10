@@ -203,10 +203,20 @@ Files included are:
 
 
 
-## Conclusion and Recommendations
-### Key Findings
+## Key Findings
 
 1. Loss is predictable: Firms' cost structures, spending ratios and size are significantly associated with loss reporting
 2. Size matters: Small firms (Q1) have 41% loss rate vs 27% loss rate for large firms (Q4).
 3. Cost volatility is telling: The cost-to-turnover ratio is the most variable feature, indicating different business models across the tax base
 4. Balanced data: The 36% loss rate in our final sample means the model doesn't require us to use SMOTE.
+
+
+## Recommendations
+1. Integrate with KRA Systems: Deploy the scoring engine to process tax returns in real-time, enabling immediate risk assessment and audit prioritization
+2. Expand Feature Set: Incorporate additional data sources such as industry benchmarks, historical tax audit results, and macroeconomic indicators to improve model accuracy
+3. Continuous Monitoring: Regularly retrain the model with updated tax data to adapt to evolving fraud patterns and maintain high performance
+4. User Interface: Build on the front-end dashboard to highlight key risk factors, and facilitate audit planning and personalize to specific sectors and firm operations.
+
+## Conclusion
+This project successfully developed a machine learning model to identify tax returns with a high probability of artificial losses. By analyzing financial ratios and firm characteristics, we trained an XGBoost model that achieved an ROC-AUC of 0.80, effectively distinguishing between genuine and potentially fraudulent loss claims. The model was deployed as a scoring engine that can be integrated into the KRA system to prioritize audits, improving efficiency and compliance.
+
