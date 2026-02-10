@@ -5,23 +5,23 @@ Authors: Brian Ndungu, Cyrus Mutuku, Grace Kinyanjui, John Karanja, Catherine Ga
 
 ![Alt text](Images/Header_Image.png)
 
-Kenya's tax authority struggles to meet Corporate Income Tax (CIT) revenue targets because many firms report losses, shrinking the tax base. This project builds a machine learning model to predict which firms are likely to report losses based on theor financial charateristics like cost structure and spending patterns. Using 2024 tax return data from nearly 100,000 firms, we developed a predictive system that helps tax officers prioritize audits on high-risk companies, improving audit efficiency and revenue recovery.
+Kenya's tax authority struggles to meet Corporate Income Tax (CIT) revenue targets because many firms report losses, shrinking the tax base. This project builds a machine learning model to predict which firms are likely to report losses based on theoretical financial charateristics like cost structure and spending patterns. Using 2024 tax return data from nearly 100,000 firms, we developed a predictive system that helps tax officers prioritize audits on high-risk companies, improving audit efficiency and revenue recovery.
 
 
 ## Business Understanding
 ### The problem
 
-KRA is responsible for collecting national government revenue including a standard 30% Corporate Income Tax on resident companies. However, Kenya has consistently failed to meet CIT revenue targets. A major driver of this shortfall is the high prevalence of firms reporting losses, which significantly reduces the effective tax base and creates fiscal deficits.
+KRA is responsible for collection of national government revenue which includes Corporate Income Tax charged at a rate of 30% on resident companies. However, Kenya has consistently failed to meet CIT revenue targets. A major driver of this shortfall is the high prevalence of firms reporting losses, which significantly reduces the effective tax base and creates fiscal deficits.
 
 The core issue is the lack of a data-driven framework to:
 1. Identify which firm characteristics are linked to loss reporting
-2. Proactively flag high-riskfirms and sectors for investigation
+2. Proactively flag high-risk firms and sectors for investigation
 3. Understand how firm-level loss behaviour impacts overall tax revenue risk
 
 Who are the benefactors?
 1. KRA Compliance Directors - need a better way to select firms for audit. Manual selection misses high-risk loss-reporting firms, so a risk scoring system would improve audit targeting and recovery.
 
-2. Tax policy Analysts - at the National Treasury struggle with revenue forecasting because they don't fully understand loss declaration patterns. Data-driven risk insights would improve budget accuracy.
+2. Tax Policy Analysts - at the National Treasury struggle with revenue forecasting because they don't fully understand loss declaration patterns. Data-driven risk insights would improve budget accuracy.
 
 3. Field Tax Officers - waste time auditing low-risk firms with minimal recovery potential. A prioritization tool would let them focus on companies with the highest evasion probability.
 
@@ -30,7 +30,7 @@ Who are the benefactors?
 An automated risk scoring system that:
 
 1. Processes firm-level CIT return data from the iTax platform
-2. Builds interpretable predictive models starting with ligistic regression
+2. Builds interpretable predictive models starting with logistic regression
 3. Applies machine learning to identify high-risk loss-reporting firms
 4. Translates individual firm risks into insights on aggregate tax revenue
 
@@ -49,7 +49,7 @@ We analyzed 2024 Corporate Income Tax return data containing:
 
 - Started with 313,870 records and 61 columns
 - Found 3,011 duplicate records which were removed
-- Identified 49 columns out of the 61 with more than 60% missing values which were excluded from modelling
+- Identified 49 columns out of the 61 with more than 60% missing values which were excluded from modeling
 
 #### Standardization:
 
@@ -79,12 +79,12 @@ Ratio Features
 - Cost-to-Turnover ratio: Cost of sales divided by revenue (mean:0.532, most volatile ratio)
 - Admin Cost ratio: Administrative expenses as % of revenue (mean:0.134)
 - Employment Cost ratio: Payroll as % of revenue (mean:0.080)
-- Finance Cost ratio: Fiancing costs as % of revenue (mean: 0.034, most stable)
+- Finance Cost ratio: Financing costs as % of revenue (mean: 0.034, most stable)
 - Deductions-to-Turnover ratio: Tax deductions as & of revenue (mean:0.035)
 
 
 Structural flags
-- High cost flag: Indivates if cost-to-turnover exceeds 90%
+- High cost flag: Indicates if cost-to-turnover exceeds 90%
 - Thin margin Flag: Marks firms with costs between 95-105% of revenue (near-loss)
 
 
@@ -101,18 +101,18 @@ Extreme values were capped at the 1st and 99th percentiles to prevent outliers f
 - Finance Cost ratio: capped at [0.0, 0.952]
 - Deductions-to-Turnover: capped at [0.0, 1.027]
 
-This removed 159 invalid records leaving 99,332 firms ready for modeling.
+This removed 159 invalid records, we retained 99,332 firms ready for modeling.
 
 ![Alt text](Images/image-2.png)
 
 ### Data Preprocessing Pipeline
 #### Numerical Features (7 variables):
-- Imputation: Replace missing values with median
+- Imputation: Replace missing values with the median
 - Scaling: Standardize to zero mean and unit variance
 
 #### Categorical Features (2 variables)
-- Imputation: Replace missing values with most frequent category
-- Encoding: One-Hot encode to convert categories to binary format
+- Imputation: Replace missing values with the most frequently appearing category
+- Encoding: One-Hot encode to convert categories to a binary format
 
 
 ### Evaluation metrics
@@ -143,7 +143,7 @@ Following the CRISP-DM method, these models were implemented:
 
 #### Random Forest Classifier
 - This model enabled us to capture complex, non-linear relationships between financial ratios and tax status.
-- This model as expected outperformed the baseline, better handling outliers and interactions between sectors and cost structures.
+- This model outperformed the baseline as expected, better handling outliers and interactions between sectors and cost structures.
 - In terms of performance: 
 We recorded an ROC-AUC score of 0.77 - meaning the model was good at distinguishing the different classes
 PR-AUC score of 0.71 -meaning it was reliable at highlighting that sector differences also play a part in recording losses.
@@ -182,9 +182,9 @@ Visualisation of the deployment
 ## Repository Navigation
 Files included are:
 
-- `CIT_Loss_Prediction-Notebook.ipynb` : the complete notebook with all the code, explanations and visuals
-- `CIT2024.csv` : The raw dataset (the one with the initial 313,870 firms)
-- `final_modeling_dataset.csv` : the cleaned and engineered dataset ready for modeling
+- `CIT_Loss_Prediction-Notebook.ipynb: the complete notebook with all the code, explanations and visuals
+- `CIT2024.csv: The raw dataset (the one with the initial 313,870 firms)
+- `final_modeling_dataset.csv`: the cleaned and engineered dataset ready for modeling
 
 
 
@@ -206,7 +206,7 @@ Files included are:
 ## Conclusion and Recommendations
 ### Key Findings
 
-1. Loss is predictable: Firms' cost structures, spending ratios and size are significantly assiciated with loss reporting
+1. Loss is predictable: Firms' cost structures, spending ratios and size are significantly associated with loss reporting
 2. Size matters: Small firms (Q1) have 41% loss rate vs 27% loss rate for large firms (Q4).
 3. Cost volatility is telling: The cost-to-turnover ratio is the most variable feature, indicating different business models across the tax base
 4. Balanced data: The 36% loss rate in our final sample means the model doesn't require us to use SMOTE.
