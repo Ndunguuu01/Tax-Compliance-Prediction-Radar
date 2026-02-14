@@ -157,6 +157,28 @@ PR-AUC score of 0.71 -meaning it was reliable at highlighting that sector differ
 2. Industry/sector - Construction and Insurance companies report losses more than others
 3. Company size - Huge companies have different loss patterns than small ones.
 
+## Deployment
+The deployment process shows how the XGBoost model can be integrated into platforms like the KRA systems to process tax risks in real-time.
+
+### Workflow
+The process follows these main steps:
+1. Data Input - key in the various inputs for your selected company
+2. Preprocessing - The automated pipeline cleans the data and creates the necessary financial ratios, ensuring the new data matches the format used for training.
+3. Risk scoring - The trained model predicts the likelihood of a firm reporting a false loss, generating a score between 0 (low risk) and 1 (high risk).
+4. Risk Banding - Based on the generated score, the firms are classified into risk categories to help tax officers prioritize audits.
+
+### Model Serialization
+We use `joblib` to save the trained model and processing tools into one file. This ensures that the same logic and steps used during development are applied in production without needing to retrain the model.
+
+### The Scoring Engine
+The `score_new_returns` function handles new data. It loads the saved model, processes the tax returns, and assigns a risk category:
+- Critical Risk: Score of 0.75 or above
+- High Risk: Score between 0.5 and 0.75
+- Normal Risk: Score below 0.5
+
+![Alt text](Images/Deployment_visual.jpeg)
+Visualisation of the deployment
+
 ## Repository Navigation
 Files included are:
 
@@ -181,10 +203,20 @@ Files included are:
 
 
 
-## Conclusion and Recommendations
-### Key Findings
+## Key Findings
 
 1. Loss is predictable: Firms' cost structures, spending ratios and size are significantly associated with loss reporting
 2. Size matters: Small firms (Q1) have 41% loss rate vs 27% loss rate for large firms (Q4).
 3. Cost volatility is telling: The cost-to-turnover ratio is the most variable feature, indicating different business models across the tax base
 4. Balanced data: The 36% loss rate in our final sample means the model doesn't require us to use SMOTE.
+
+
+## Recommendations
+1. Integrate with KRA Systems: Deploy the scoring engine to process tax returns in real-time, enabling immediate risk assessment and audit prioritization
+2. Expand Feature Set: Incorporate additional data sources such as industry benchmarks, historical tax audit results, and macroeconomic indicators to improve model accuracy
+3. Continuous Monitoring: Regularly retrain the model with updated tax data to adapt to evolving fraud patterns and maintain high performance
+4. User Interface: Build on the front-end dashboard to highlight key risk factors, and facilitate audit planning and personalize to specific sectors and firm operations.
+
+## Conclusion
+This project successfully developed a machine learning model to identify tax returns with a high probability of artificial losses. By analyzing financial ratios and firm characteristics, we trained an XGBoost model that achieved an ROC-AUC of 0.80, effectively distinguishing between genuine and potentially fraudulent loss claims. The model was deployed as a scoring engine that can be integrated into the KRA system to prioritize audits, improving efficiency and compliance.
+
